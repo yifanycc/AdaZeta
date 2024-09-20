@@ -11,7 +11,7 @@ dimension-dependent ZO estimation accuracy, we introduce a fast-forward, low-par
 <h1> <p>🤗 News</p></h1>
 
 
-**09/20/2024:** We plan to release the formal source code with detailed documentation around the first week of Oct, stay tuned.
+**09/20/2024: We plan to release the formal source code with detailed documentation around the first week of Oct, stay tuned. ** 
 
 **09/20/2024:** Our paper 'AdaZeta: Adaptive Zeroth-Order Tensor-Train Adaption for Memory-Efficient Large Language Models Fine-Tuning'
 has been accepted by the EMNLP 2024 main conference

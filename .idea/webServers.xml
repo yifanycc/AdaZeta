@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b22375fc-7560-469d-84f1-cdd36c57907f" name="linux-gpu-03.ece.ucsb.edu">
+        <fileTransfer rootFolder="/home/yifanyang" accessType="SFTP" host="linux-gpu-03.ece.ucsb.edu" port="22" sshConfigId="1b62cb30-61d0-4891-91a9-f796b19ab8c4" sshConfig="yifanyang@linux-gpu-03.ece.ucsb.edu:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

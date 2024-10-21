@@ -627,11 +627,7 @@ class OurTrainer(Trainer):
         total_steps = 0
         for epoch in range(epochs_trained, num_train_epochs):
             if not self.args.use_num:
-                self.args.num_pertub = min(max(self.args.num_pertub_init + int(self.args.shrink_factor * (epoch ** self.args.inc_rate)), 1), 15)
-                # self.args.num_pertub = max(self.args.num_pertub_init + int(self.args.shrink_factor * (epoch ** self.args.inc_rate)), 1)
-
-                # if self.state.global_step >= 600:
-                #     self.args.num_pertub = 30
+                self.args.num_pertub = min(max(int(self.args.shrink_factor * (epoch ** self.args.inc_rate)), 1), self.args.num_pertub_max)
             wandb.log({"num_pertub": self.args.num_pertub , "global_step": self.state.global_step})
             epoch_iterator = train_dataloader
             if hasattr(epoch_iterator, "set_epoch"):

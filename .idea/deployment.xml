@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="yifanyang@linux-gpu-03.ece.ucsb.edu:22 password" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="linux-gpu-03.ece.ucsb.edu">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/AdaZeta" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="yifanyang@linux-gpu-03.ece.ucsb.edu:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="tmp/AdaZeta" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

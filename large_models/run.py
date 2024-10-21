@@ -22,8 +22,8 @@ from utils import *
 from transformers import Trainer
 from trainer_adazeta import OurTrainer as ZetaTrainer
 from trainer_mezo import OurTrainer as MezoTrainer
-from trainer_sparse import OurTrainer as SparseTrainer
-# from transformers import Trainer as OurTrainer
+
+
 import random
 import wandb
 sys.path.append(os.path.join(os.getcwd(), "peft_local/src/"))
@@ -65,7 +65,7 @@ class OurArguments(TrainingArguments):
 
     # Training
     num_pertub: int = 30
-    num_pertub_init: int = 10
+    num_pertub_max: int = 15
     local_server: bool = False
     trainer: str = "regular"
     ## options
@@ -245,18 +245,7 @@ class Framework:
                 task_type="CAUSAL_LM",
             )
             model = get_peft_model(model, config)
-        if self.args.tuning_type == 'loretta_rep':
-            from loretta import LorettaAdpConfig, LorettaRepConfig, get_peft_model, TaskType
-            peft_config = LorettaRepConfig(
-                r=8,  # bottleneck
-                lora_alpha=16,
-                target_modules=None,
-                lora_dropout=0.05,
-                bias="none",
-                task_type='CAUSAL_LM',  # choose from "SEQ_CLS", "SEQ_2_SEQ_LM", "CAUSAL_LM", "TOKEN_CLS"
-                tensor_rank=self.args.rank,
-            )
-            model = get_peft_model(model, peft_config)
+
         if self.args.tuning_type == 'adapters':
             from peft_local import (  # noqa: E402
                 LoraConfig,
@@ -336,7 +325,7 @@ class Framework:
         #
         #     model = get_peft_model(model, peft_config)
 
-        if self.args.tuning_type == 'loretta_adp':
+        if self.args.tuning_type == 'adazeta':
             from loretta import LorettaAdpConfig, get_peft_model
             bottleneck_size: int = 64
             non_linearity: str = "relu"
@@ -618,7 +607,7 @@ class Framework:
             # calculating the inc rate base on num
             if not self.args.use_num:
                 total_epoch = self.args.max_steps / (len(train_dataset) / self.args.per_device_train_batch_size)
-                self.args.inc_rate = math.log((1 / self.args.shrink_factor) * (self.args.num_pertub - self.args.num_pertub_init)) / math.log(total_epoch)
+                self.args.inc_rate = math.log((1 / self.args.shrink_factor) * self.args.num_pertub) / math.log(total_epoch)
                 print(f'total epoch {total_epoch} inc_rate {self.args.inc_rate}')
             trainer = ZetaTrainer(
                 model=self.model,
@@ -631,19 +620,7 @@ class Framework:
                 evaluate_func=self.evaluate,
                 eval_samples=eval_samples,
             )
-        elif self.args.trainer == 'sparse':
-            trainer = SparseTrainer(
-                model=self.model,
-                args=self.args,
-                train_dataset=train_dataset,
-                eval_dataset=eval_dataset,
-                tokenizer=self.tokenizer,
-                data_collator=DataCollatorWithPaddingAndNesting(self.tokenizer,
-                                                                pad_to_multiple_of=8) if self.args.train_as_classification else collator(
-                    self.tokenizer, pad_to_multiple_of=8),
-                evaluate_func=self.evaluate,
-                eval_samples=eval_samples,
-            )
+
 
 
         if self.args.save_on_interrupt:

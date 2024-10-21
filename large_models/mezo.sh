@@ -14,8 +14,8 @@ STEPS=${STEPS:-10000}
 SHRINK=${SHRINK:-0.5}
 EVAL_STEPS=${EVAL_STEPS:-200}
 DEVICE=${DEVICE:-0}
-NUM=${NUM:-30}
-NUM_INIT=${NUM_INIT:-10}
+NUM=${NUM:-15}
+NUM_MAX=${NUM_MAX:-10}
 RATE=${RATE:-0.4}
 LR_SCH=${LR_SCH:-1}
 TRAINER=${TRAINER:-mezo}
@@ -30,12 +30,10 @@ if [ "$MODE" == "prefix" ]; then
 elif [ "$MODE" == "lora" ]; then
     EXTRA_ARGS="--lora"
     TYPE="lora"
-elif [ "$MODE" == "loretta_rep" ]; then
-    TYPE="loretta_rep"
 elif [ "$MODE" == "adapters" ]; then
     TYPE="adapters"
-elif [ "$MODE" == "loretta_adp" ]; then
-    TYPE="loretta_adp"
+elif [ "$MODE" == "adazeta" ]; then
+    TYPE="adazeta"
 elif [ "$MODE" == "prompt" ]; then
     TYPE="prompt"
 elif [ "$MODE" == "bitfit" ]; then
@@ -101,7 +99,7 @@ python run.py \
     --learning_rate $LR --zo_eps $EPS --per_device_train_batch_size $BS --lr_scheduler_type $LR_SCH --weight_decay=0.01\
     --load_best_model_at_end --evaluation_strategy steps --save_strategy steps --save_total_limit 1 \
     --eval_steps $EVAL_STEPS --save_steps $EVAL_STEPS --shrink_factor $SHRINK \
-    --train_as_classification --num_pertub_init $NUM_INIT $USE_NUM --local_server\
+    --train_as_classification --num_pertub_max $NUM_MAX $USE_NUM --local_server\
     $EXTRA_ARGS \
     $TASK_ARGS \
     $HEAD_TUNE \

@@ -78,13 +78,21 @@ the [MeZO Trainer](https://github.com/princeton-nlp/MeZO/blob/main/large_models/
 - If there is any problem, feel free to reach out `yifanyang@cs.ucsb.edu` or open an issue.
 
 ## Citation
-If our work or code supports your research, we would greatly appreciate it if you could cite our paper:
+If our work or code supports your research, we would greatly appreciate it if you could cite our related papers:
 
 ```angular2html
 @article{yang2024adazeta,
   title={AdaZeta: Adaptive Zeroth-Order Tensor-Train Adaption for Memory-Efficient Large Language Models Fine-Tuning},
   author={Yang, Yifan and Zhen, Kai and Banijamal, Ershad and Mouchtaris, Athanasios and Zhang, Zheng},
   journal={arXiv preprint arXiv:2406.18060},
+  year={2024}
+}
+
+@inproceedings{yang2024loretta,
+  title={LoRETTA: Low-Rank Economic Tensor-Train Adaptation for Ultra-Low-Parameter Fine-Tuning of Large Language Models},
+  author={Yang, Yifan and Zhou, Jiajun and Wong, Ngai and Zhang, Zheng},
+  booktitle={Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)},
+  pages={3161--3176},
   year={2024}
 }
 ```

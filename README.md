@@ -74,6 +74,13 @@ The tensorized adapters used in this paper is generally same as LoRETTA_Adp meth
 
 - For the zeroth-order adaptive query schedule method, replace the official huggingface trainer with our `ZetaTrainer` in `large_models/trainer_adazeta.py`. Our trainer class is based on
 the [MeZO Trainer](https://github.com/princeton-nlp/MeZO/blob/main/large_models/trainer.py) and the [Huggingface Trainer](https://github.com/huggingface/transformers/blob/v4.45.2/src/transformers/trainer.py#L290).
+
+## (New) Multi-queries Distributed Training
+We added the trainer file to suppport the multi-queries distributed trianing (You may need to do some modification on the main file to replace the old trainer). The multi-queries training distributes multiple ZO estmiation (RGE) on different GPUs and all-gather thereafter. The convergence speed of our AdaZeta method is further enhance after using the distributed training, which is more effective than enlarging the batch size. The new trainer file is in `large_models/trainer_dist_adazeta.py`. The main differnce compared with previous trainer is listed as follows:
+- We fixed some bugs like loss-logging problem in previous trainer
+- We offer a new `zo_dist_step` function, enable the distributed ZO estimiation and all_gather operation
+- We modify the dataloader, to support multi-gpus estimation with same batch of data on different GPUs.
+
 ## Note
 - The code is built based on the MeZO code in https://github.com/princeton-nlp/MeZO. We would like to express our gratitude for the publicly accessible resources provided by other researchers!
 

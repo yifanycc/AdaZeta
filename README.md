@@ -15,6 +15,8 @@ dimension-dependent ZO estimation accuracy, we introduce a fast-forward, low-par
 
 <h1> <p>🤗 News</p></h1>
 
+**12/15/2024:** We update a distributed muti-queries ZO trainer for the large model experiments, which supports query distibuted on multi-GPUs and support transformers>4.40.
+
 **10/21/2024:** First version of source code is released, feel free to reach out or open an issue if there is bugs in our code.
 
 **09/20/2024:** Our paper 'AdaZeta: Adaptive Zeroth-Order Tensor-Train Adaption for Memory-Efficient Large Language Models Fine-Tuning'
